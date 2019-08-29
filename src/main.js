@@ -6,6 +6,13 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
+const base = axios.create({
+  baseURL: 'https://api.openweathermap.org/data/2.5',
+});
+
+Vue.prototype.$http = base;
+
+
 new Vue({
   router,
   store,

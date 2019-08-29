@@ -1,12 +1,42 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Home</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+export default {
+  mounted() {
+    if(Object.keys(this.$store.state.cities).length) {
+      this.getWeather(Object.keys(this.$store.state.cities))
+    }
+  },
+  computed: {
+    ...mapGetters(['GET_CITIES'])
+  },
+  methods: {
+    async getWeather (cityName) {
+      this.$http.get('/weather', {
+        params: {
+          APPID: this.apiKey,
+          units: 'metric',
+          id: '' + cityName,
+        },
+      }).then((response) => {
+        console.log(response.data)
+        this.currentCityInfo = response.data
+      })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

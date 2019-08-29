@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
 import VuexPersist from 'vuex-persist';
 
 const vuexPersist = new VuexPersist({
@@ -8,39 +7,32 @@ const vuexPersist = new VuexPersist({
   storage: window.localStorage,
 });
 
-const base = axios.create({
-  baseURL: 'https://api.openweathermap.org/data/2.5',
-});
-
-Vue.prototype.$http = base;
-
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    apiKey: '10d07494e770c41f4af2a455d92ee8f5',
     cities: {},
   },
   getters: {
-
+    GET_CITIES(state) {
+      return state.cities;
+    },
   },
   mutations: {
-
+    ADD_CITY: (state, cityInfo) => {
+      state.cities[cityInfo.id] = cityInfo;
+      console.log(state.cities)
+    },
+    REMOVE_CITY: (state, cityInfo) => {
+      delete state.cities[cityInfo.id];
+    },
   },
   actions: {
-    GET_WEATHER: async (context, payload) => {
-      base.get('/weather', {
-        params: {
-          APPID: context.state.apiKey,
-          q: payload,
-        },
-      }).then((response) => {
-        console.log(response.data)
-      })
-        .catch((e) => {
-          console.error(e)
-        })
+    ADD_CITY: (context, payload) => {
+      context.commit('ADD_CITY', payload);
+    },
+    REMOVE_CITY: (context, payload) => {
+      context.commit('REMOVE_CITY', payload);
     },
   },
   plugins: [vuexPersist.plugin],
