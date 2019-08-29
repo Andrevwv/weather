@@ -20,6 +20,7 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_CITY: (state, cityInfo) => {
+      // state.cities = {}
       state.cities[cityInfo.id] = cityInfo;
       console.log(state.cities)
     },

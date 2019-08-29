@@ -10,6 +10,9 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
+  data: _ => ({
+    apiKey: '10d07494e770c41f4af2a455d92ee8f5',
+  }),
   mounted() {
     if(Object.keys(this.$store.state.cities).length) {
       this.getWeather(Object.keys(this.$store.state.cities))
@@ -20,7 +23,7 @@ export default {
   },
   methods: {
     async getWeather (cityName) {
-      this.$http.get('/weather', {
+      this.$http.get('/group', {
         params: {
           APPID: this.apiKey,
           units: 'metric',
