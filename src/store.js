@@ -27,6 +27,11 @@ export default new Vuex.Store({
     REMOVE_CITY: (state, cityInfo) => {
       delete state.cities[cityInfo.id];
     },
+    UPDATE_CITIES: (state, citiesWeather) => {
+      citiesWeather.forEach((city) => {
+        state.cities[city.id] = city;
+      });
+    },
   },
   actions: {
     ADD_CITY: (context, payload) => {
@@ -34,6 +39,9 @@ export default new Vuex.Store({
     },
     REMOVE_CITY: (context, payload) => {
       context.commit('REMOVE_CITY', payload);
+    },
+    UPDATE_CITIES: (context, payload) => {
+      context.commit('UPDATE_CITIES', payload);
     },
   },
   plugins: [vuexPersist.plugin],

@@ -9,25 +9,19 @@
 
 <script>
 import { mapActions } from 'vuex';
+import params from '@/api-settings'
+
 export default {
   data: _ => ({
-    apiKey: '10d07494e770c41f4af2a455d92ee8f5',
     city: '',
     currentCityInfo: {}
   }),
-  computed: {
-    
-  },
-  created() {
-    this.getWeather('London')
-  },
   methods: {
     ...mapActions(['ADD_CITY', 'REMOVE_CITY']),
     async getWeather (cityName) {
       this.$http.get('/weather', {
         params: {
-          APPID: this.apiKey,
-          units: 'metric',
+          ...params,
           q: cityName,
         },
       }).then((response) => {

@@ -8,30 +8,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import params from '@/api-settings'
 export default {
-  data: _ => ({
-    apiKey: '10d07494e770c41f4af2a455d92ee8f5',
-  }),
-  mounted() {
-    if(Object.keys(this.$store.state.cities).length) {
-      this.getWeather(Object.keys(this.$store.state.cities))
+  created() {
+    if(Object.keys(this.GET_CITIES).length) {
+      this.getWeather(Object.keys(this.GET_CITIES))
     }
   },
   computed: {
     ...mapGetters(['GET_CITIES'])
   },
   methods: {
-    async getWeather (cityName) {
+    ...mapActions(['UPDATE_CITIES']),
+    async getWeather (citiesNames) {
       this.$http.get('/group', {
         params: {
-          APPID: this.apiKey,
-          units: 'metric',
-          id: '' + cityName,
+          ...params,
+          id: citiesNames.toString(),
         },
       }).then((response) => {
-        console.log(response.data)
-        this.currentCityInfo = response.data
+        this.UPDATE_CITIES(response.data.list)
       })
         .catch((e) => {
           console.log(e);
