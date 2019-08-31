@@ -1,41 +1,41 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import params from '@/api-settings'
+import params from '@/api-settings';
 export default {
   created() {
-    if(Object.keys(this.GET_CITIES).length) {
-      this.getWeather(Object.keys(this.GET_CITIES))
+    // this.ADD_CITY({});
+    if (Object.keys(this.GET_CITIES).length) {
+      this.getWeather(Object.keys(this.GET_CITIES));
     }
   },
   computed: {
-    ...mapGetters(['GET_CITIES'])
+    ...mapGetters(['GET_CITIES']),
   },
   methods: {
-    ...mapActions(['UPDATE_CITIES']),
-    async getWeather (citiesNames) {
-      this.$http.get('/group', {
-        params: {
-          ...params,
-          id: citiesNames.toString(),
-        },
-      }).then((response) => {
-        this.UPDATE_CITIES(response.data.list)
-      })
-        .catch((e) => {
+    ...mapActions(['UPDATE_CITIES', 'ADD_CITY']),
+    async getWeather(citiesNames) {
+      this.$http
+        .get('/group', {
+          params: {
+            ...params,
+            id: citiesNames.toString(),
+          },
+        })
+        .then(response => {
+          this.UPDATE_CITIES(response.data.list);
+        })
+        .catch(e => {
           console.log(e);
         });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">

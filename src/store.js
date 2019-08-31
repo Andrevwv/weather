@@ -1,48 +1,59 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VuexPersist from 'vuex-persist';
+import Vue from "vue";
+import Vuex from "vuex";
+import VuexPersist from "vuex-persist";
 
 const vuexPersist = new VuexPersist({
-  key: 'weather',
-  storage: window.localStorage,
+  key: "weather",
+  storage: window.localStorage
 });
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    cities: {},
+    cities: {}
   },
   getters: {
-    GET_CITIES(state) {
-      return state.cities;
-    },
+    GET_CITIES: state => state.cities,
+    GET_CITY: state => id => state.cities[id]
   },
   mutations: {
     ADD_CITY: (state, cityInfo) => {
       // state.cities = {}
-      state.cities[cityInfo.id] = cityInfo;
-      console.log(state.cities)
+      console.log(cityInfo);
+      state.cities = {
+        ...state.cities,
+        [cityInfo.id]: cityInfo
+      };
     },
-    REMOVE_CITY: (state, cityInfo) => {
-      delete state.cities[cityInfo.id];
+    REMOVE_CITY: (state, id) => {
+      // const { cities } = state;
+      // console.log(cities);
+      delete state.cities[id];
+      state.cities = {
+        ...state.cities
+      };
     },
     UPDATE_CITIES: (state, citiesWeather) => {
-      citiesWeather.forEach((city) => {
+      citiesWeather.forEach(city => {
+        console.log(city);
         state.cities[city.id] = city;
       });
-    },
+    }
   },
   actions: {
     ADD_CITY: (context, payload) => {
-      context.commit('ADD_CITY', payload);
+      if (payload) {
+        console.log(payload);
+        context.commit("ADD_CITY", payload);
+      }
     },
     REMOVE_CITY: (context, payload) => {
-      context.commit('REMOVE_CITY', payload);
+      context.commit("REMOVE_CITY", payload);
     },
     UPDATE_CITIES: (context, payload) => {
-      context.commit('UPDATE_CITIES', payload);
-    },
+      context.commit("UPDATE_CITIES", payload);
+    }
   },
-  plugins: [vuexPersist.plugin],
+  plugins: [vuexPersist.plugin]
 });
