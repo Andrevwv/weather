@@ -8,9 +8,13 @@
         :id="city.id"
         :name="city.name"
         :temperature="city.main.temp"
+        :weather="city.weather[0].main"
       />
     </div>
-    <div v-else class="weather__placeholder">No cities added</div>
+    <div v-else class="weather__placeholder">
+      <h1>No cities added</h1>
+      <p>Please enter city name and press 'Add'</p>
+    </div>
   </div>
 </template>
 
@@ -28,5 +32,17 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.weather
+  padding: 4rem 2rem
+  min-height: 100vh
 
+  &__cities
+    margin-top: 4rem
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: 1fr;
+    grid-gap: 4rem
+  &__placeholder
+    font-size: 2rem
+    margin-top: 4rem
 </style>

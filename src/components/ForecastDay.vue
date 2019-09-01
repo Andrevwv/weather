@@ -1,16 +1,21 @@
 <template>
   <div class="day">
-    <div class="day__time">Time: {{ time }}</div>
-    <div class="day__humidity">Humidity: {{ dayInfo.main.humidity }} %</div>
-    <div class="day__pressure">Pressure: {{ dayInfo.main.pressure }} hPa</div>
-    <div class="city__temp_max">Max. daily temperature: {{ dayInfo.main.temp_max }} °C</div>
-    <div class="city__temp_min">Min. daily tempereture: {{ dayInfo.main.temp_min }} °C</div>
-    <div class="day__temp_min">Wind speed: {{ dayInfo.wind.speed }} meter/sec</div>
-    <img
-      :src="`http://openweathermap.org/img/wn/${dayInfo.weather[0].icon}@2x.png`"
-      alt="weather icon"
-    />
-    <div class="day__temp_min">{{ dayInfo.weather[0].main }}</div>
+    <img class="day__image" :src="`/images/${dayInfo.weather[0].main}.svg`" alt="weather icon" />
+    <div class="day__time">{{ time }}</div>
+    <div class="day__temp">{{ Math.round(dayInfo.main.temp) }} °C</div>
+    <div class="day__info info">
+      <img src="/images/Humidity.svg" class="info__image" />
+      {{ dayInfo.main.humidity }} %
+    </div>
+
+    <div class="day__info info">
+      <img src="/images/Pressure.svg" class="info__image" />
+      {{ Math.round(dayInfo.main.pressure) }} hPa
+    </div>
+    <div class="day__info info">
+      <img src="/images/Wind.svg" class="info__image" />
+      {{ dayInfo.wind.speed }} m/s
+    </div>
   </div>
 </template>
 
@@ -29,3 +34,36 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+.day
+	display: flex
+	flex-direction: column
+	align-items: flex-start
+	padding: 1rem
+	background-color: #f4f4f4
+	border-radius: 0.5rem
+	&:hover
+		background-color: #eeeeee
+
+	&__image
+		align-self: center
+		max-width: 3rem
+	&__info
+		margin-top: 1rem
+	&__time
+		align-self: center
+		margin-top: 0.3rem
+		font-size: 0.8rem
+	&__temp
+		align-self: center
+		margin-top: 1rem
+		font-size: 2rem
+
+.info
+	display: flex
+	align-items: center
+	&__image
+		width: 1.5rem
+		margin-right: 0.5rem
+</style>
