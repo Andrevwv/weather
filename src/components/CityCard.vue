@@ -1,6 +1,9 @@
 <template>
   <router-link class="city" :to="'/' + id" :style="getStyle()">
     <div @click.prevent="REMOVE_CITY(id)" class="city__remove"></div>
+    <div @click.prevent="getWeather(id)" class="city__reload">
+      <img class="city__reload-img" src="../assets/images/reload.svg" alt="weather image" />
+    </div>
     <img class="city__image" :src="require(`../assets/images/${weather}.svg`)" alt="weather image" />
     <div class="city__temerature">{{ Math.round(temperature) }}&#8451;</div>
     <div class="city__name">{{ name }}</div>
@@ -9,6 +12,8 @@
 
 <script>
 import { mapActions } from 'vuex';
+import params from '@/api-settings';
+
 export default {
   props: {
     id: Number,
@@ -17,7 +22,23 @@ export default {
     weather: String,
   },
   methods: {
-    ...mapActions(['REMOVE_CITY']),
+    ...mapActions(['REMOVE_CITY', 'UPDATE_CITY']),
+    async getWeather(cityId) {
+      this.$http
+        .get('/weather', {
+          params: {
+            ...params,
+            id: cityId,
+          },
+        })
+        .then(response => {
+          console.log(response.data);
+          this.UPDATE_CITY(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     getStyle() {
       const main = [
         '#FD9207',
@@ -68,6 +89,11 @@ export default {
 			&:hover
 				opacity: 1
 				transform: rotate(90deg)
+		.city__reload
+			opacity: 0.7
+			&:hover
+				opacity: 1
+				transform: rotate(90deg)
 
 	&__remove
 		transition: all 0.2s
@@ -95,6 +121,22 @@ export default {
 			transform: rotate(45deg)
 		&::after
 			transform: rotate(-45deg)
+	&__reload
+		transition: all 0.2s
+		display: inline-block
+		opacity: 0
+		position: absolute
+		border-radius: 50%
+		background-color: white
+		left: 1rem
+		top: 1rem
+		width: 1.3rem
+		height: 1.3rem
+		z-index: 1
+
+	&__reload-img
+		width: 70%
+		margin: 0.2rem
 	&__temerature
 		font-size: 3.5rem
 		align-self: flex-start

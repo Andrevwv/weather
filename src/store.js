@@ -34,6 +34,9 @@ export default new Vuex.Store({
       citiesWeather.forEach(city => {
         state.cities[city.id] = city;
       });
+    },
+    UPDATE_CITY: (state, cityWeather) => {
+      state.cities[cityWeather.id] = cityWeather;
     }
   },
   actions: {
@@ -47,6 +50,9 @@ export default new Vuex.Store({
     },
     UPDATE_CITIES: (context, payload) => {
       context.commit("UPDATE_CITIES", payload);
+    },
+    UPDATE_CITY: (context, payload) => {
+      context.commit("UPDATE_CITY", payload);
     }
   },
   plugins: [vuexPersist.plugin]

@@ -11,7 +11,6 @@ import { mapGetters, mapActions } from 'vuex';
 import params from '@/api-settings';
 export default {
   created() {
-    // this.ADD_CITY({});
     if (Object.keys(this.GET_CITIES).length) {
       this.getWeather(Object.keys(this.GET_CITIES));
     }
