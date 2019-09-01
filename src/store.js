@@ -19,16 +19,12 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_CITY: (state, cityInfo) => {
-      // state.cities = {}
-      console.log(cityInfo);
       state.cities = {
         ...state.cities,
         [cityInfo.id]: cityInfo
       };
     },
     REMOVE_CITY: (state, id) => {
-      // const { cities } = state;
-      // console.log(cities);
       delete state.cities[id];
       state.cities = {
         ...state.cities
@@ -36,7 +32,6 @@ export default new Vuex.Store({
     },
     UPDATE_CITIES: (state, citiesWeather) => {
       citiesWeather.forEach(city => {
-        console.log(city);
         state.cities[city.id] = city;
       });
     }
@@ -44,7 +39,6 @@ export default new Vuex.Store({
   actions: {
     ADD_CITY: (context, payload) => {
       if (payload) {
-        console.log(payload);
         context.commit("ADD_CITY", payload);
       }
     },

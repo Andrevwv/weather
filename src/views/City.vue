@@ -52,14 +52,14 @@
             <div class="info__heading">Sunrise</div>
             <div class="info__container">
               <img :src="require(`../assets/images/sunrise.svg`)" class="info__image" />
-              <div class="info__value">{{ sunrise }}</div>
+              <div class="info__value">{{ getTime(city.sys.sunrise) }}</div>
             </div>
           </div>
           <div class="city__info info">
             <div class="info__heading">Sunset</div>
             <div class="info__container">
               <img :src="require(`../assets/images/sunset.svg`)" class="info__image" />
-              <div class="info__value">{{ sunset }}</div>
+              <div class="info__value">{{ getTime(city.sys.sunset) }}</div>
             </div>
           </div>
         </div>
@@ -94,23 +94,16 @@ export default {
   },
   computed: {
     city() {
-      console.log(this.$store.getters.GET_CITY(this.$route.params.id));
       return this.$store.getters.GET_CITY(this.$route.params.id);
-    },
-    sunrise() {
-      let sunriseTime = new Date(this.city.sys.sunrise * 1000);
-      let hours = ('0' + sunriseTime.getHours()).slice(-2);
-      let minutes = ('0' + sunriseTime.getMinutes()).slice(-2);
-      return `${hours}:${minutes}`;
-    },
-    sunset() {
-      let sunsetTime = new Date(this.city.sys.sunset * 1000);
-      let hours = ('0' + sunsetTime.getHours()).slice(-2);
-      let minutes = ('0' + sunsetTime.getMinutes()).slice(-2);
-      return `${hours}:${minutes}`;
     },
   },
   methods: {
+    getTime(timestamp) {
+      let time = new Date(timestamp * 1000);
+      let hours = ('0' + time.getHours()).slice(-2);
+      let minutes = ('0' + time.getMinutes()).slice(-2);
+      return `${hours}:${minutes}`;
+    },
     getForecast(id) {
       this.$http
         .get('/forecast', {
