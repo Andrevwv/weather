@@ -32,7 +32,6 @@ export default {
           },
         })
         .then(response => {
-          console.log(response.data);
           this.UPDATE_CITY(response.data);
         })
         .catch(e => {
