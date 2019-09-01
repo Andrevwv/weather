@@ -1,29 +1,28 @@
-# weather
+# Weather app
+
+Used:
+
+1. VUE.js
+2. VUEX
+3. VUE Router
+4. axios HTTP client
+5. grid & flex layouts
+6. transitions on page change
 
 ## Project setup
+
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Deploy to gh-pages
 
-### Run your tests
 ```
-npm run test
+bash deploy.sh
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
