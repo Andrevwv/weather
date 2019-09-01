@@ -1,10 +1,12 @@
 # Weather app
 
+### Try app (HERE)[https://andrevwv.github.io/weather/]
+
 Used:
 
-1. VUE.js
-2. VUEX
-3. VUE Router
+1. Vue.js
+2. Vuex
+3. Vue Router
 4. axios HTTP client
 5. grid & flex layouts
 6. transitions on page change
