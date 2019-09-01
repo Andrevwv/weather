@@ -1,19 +1,23 @@
 <template>
   <div class="day">
-    <img class="day__image" :src="`/images/${dayInfo.weather[0].main}.svg`" alt="weather icon" />
+    <img
+      class="day__image"
+      :src="require(`../assets/images/${dayInfo.weather[0].main}.svg`)"
+      alt="weather icon"
+    />
     <div class="day__time">{{ time }}</div>
     <div class="day__temp">{{ Math.round(dayInfo.main.temp) }} °C</div>
     <div class="day__info info">
-      <img src="/images/Humidity.svg" class="info__image" />
+      <img :src="require(`../assets/images/Humidity.svg`)" class="info__image" />
       {{ dayInfo.main.humidity }} %
     </div>
 
     <div class="day__info info">
-      <img src="/images/Pressure.svg" class="info__image" />
+      <img :src="require(`../assets/images/Pressure.svg`)" class="info__image" />
       {{ Math.round(dayInfo.main.pressure) }} hPa
     </div>
     <div class="day__info info">
-      <img src="/images/Wind.svg" class="info__image" />
+      <img :src="require(`../assets/images/Wind.svg`)" class="info__image" />
       {{ dayInfo.wind.speed }} m/s
     </div>
   </div>

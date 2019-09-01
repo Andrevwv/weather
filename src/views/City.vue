@@ -5,56 +5,60 @@
       <div class="city__name">{{ city.name }}</div>
       <div class="city__current-weather">
         <div class="city__main">
-          <img class="city__image" :src="`/images/${city.weather[0].main}.svg`" alt />
+          <img
+            class="city__image"
+            :src="require(`../assets/images/${city.weather[0].main}.svg`)"
+            alt
+          />
           <div class="city__temp">{{ Math.round(city.main.temp) }} °C</div>
         </div>
         <div class="city__additional">
           <div class="city__info info">
             <div class="info__heading">Humidity</div>
             <div class="info__container">
-              <img src="/images/Humidity.svg" class="info__image" />
+              <img :src="require('../assets/images/Humidity.svg')" class="info__image" />
               <div class="info__value">{{ city.main.humidity }} %</div>
             </div>
           </div>
           <div class="city__info info">
             <div class="info__heading">Pressure</div>
             <div class="info__container">
-              <img src="/images/Pressure.svg" class="info__image" />
+              <img :src="require(`../assets/images/Pressure.svg`)" class="info__image" />
               <div class="info__value">{{ Math.round(city.main.pressure) }} hPa</div>
             </div>
           </div>
           <div class="city__info info">
             <div class="info__heading">Max. temp.</div>
             <div class="info__container">
-              <img src="/images/Max.svg" class="info__image" />
+              <img :src="require(`../assets/images/Max.svg`)" class="info__image" />
               <div class="info__value">{{ Math.round(city.main.temp_max) }} °C</div>
             </div>
           </div>
           <div class="city__info info">
             <div class="info__heading">Min. temp.</div>
             <div class="info__container">
-              <img src="/images/Min.svg" class="info__image" />
+              <img :src="require(`../assets/images/Min.svg`)" class="info__image" />
               <div class="info__value">{{ Math.round(city.main.temp_min) }} °C</div>
             </div>
           </div>
           <div class="city__info info">
             <div class="info__heading">Wind speed</div>
             <div class="info__container">
-              <img src="/images/Wind.svg" class="info__image" />
+              <img :src="require(`../assets/images/Wind.svg`)" class="info__image" />
               <div class="info__value">{{ city.wind.speed }} m/s</div>
             </div>
           </div>
           <div class="city__info info">
             <div class="info__heading">Sunrise</div>
             <div class="info__container">
-              <img src="/images/sunrise.svg" class="info__image" />
+              <img :src="require(`../assets/images/sunrise.svg`)" class="info__image" />
               <div class="info__value">{{ sunrise }}</div>
             </div>
           </div>
           <div class="city__info info">
             <div class="info__heading">Sunset</div>
             <div class="info__container">
-              <img src="/images/sunset.svg" class="info__image" />
+              <img :src="require(`../assets/images/sunset.svg`)" class="info__image" />
               <div class="info__value">{{ sunset }}</div>
             </div>
           </div>

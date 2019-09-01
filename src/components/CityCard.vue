@@ -1,7 +1,7 @@
 <template>
   <router-link class="city" :to="'/' + id" :style="getStyle()">
     <div @click.prevent="REMOVE_CITY(id)" class="city__remove"></div>
-    <img class="city__image" :src="`/images/${weather}.svg`" alt="weather image" />
+    <img class="city__image" :src="require(`../assets/images/${weather}.svg`)" alt="weather image" />
     <div class="city__temerature">{{ Math.round(temperature) }}&#8451;</div>
     <div class="city__name">{{ name }}</div>
   </router-link>
