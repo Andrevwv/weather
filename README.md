@@ -1,6 +1,6 @@
 # Weather app
 
-### Try app (HERE)[https://andrevwv.github.io/weather/]
+### Try app [HERE](https://andrevwv.github.io/weather/)
 
 Used:
 
